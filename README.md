@@ -1,7 +1,18 @@
 ##### ShodanAPI
-- Write output in a file
+Script que usa a api do shodan para buscar serviços/hosts. 
+
+## Usage:
+```
+./shodan_api.py <search>
+```
  
- #### Filters
+### Requisitos:
+- Módulo shodan
+```
+pip3 install shodan
+```
+
+#### Filters
 ```
 <keyword>:<value>
     city:      find devices in a particular city

@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 import json, shodan, sys
-
 key='[CENSURADO]'
 api=shodan.Shodan(key)
+f=open("report.out","w+")
 
 def search():
-    if len(sys.argv) < 1:
+    if len(sys.argv) < 2:
         what=input("Search: ")
     else:
         what=sys.argv[1]
@@ -22,6 +22,7 @@ def search():
         print(results['total'])
     except Exception as error:
         print("Error: ", error)
+
 def hostsearch(target):
     host =  api.host(target)
     print('''IP: %s
@@ -29,7 +30,10 @@ def hostsearch(target):
                 OS:  %s ''' % (host['ip_str'],host.get('org','n/a'), host.get('os', 'n/a' ))) 
     for item in host['data']:
         print("Port: "+str(item['port'])+"\nBanner :"+str(item['data']))
+        f.write(host['ip_str']+'\n')
 def main():
     print("Come on") 
     search()
+
 main()
+f.close()
